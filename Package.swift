@@ -24,23 +24,7 @@ let package = Package(
                 "Alamofire",
                 "SwiftyJSON"
             ],
-            path: ".",
-            exclude: [
-                "Examples",
-                "README.md",
-                "FEATURES.md",
-                "ARCHITECTURE.md",
-                "COMPILATION.md",
-                "SUMMARY.md",
-                "STATUS.md",
-                "FINAL_REPORT.md",
-                "ISSUES_FOUND.md",
-                "FIXES.md",
-                "build.sh",
-                "compile_check.sh",
-                "validate.swift",
-                ".git"
-            ]
+            path: "Sources"
         )
     ]
 )

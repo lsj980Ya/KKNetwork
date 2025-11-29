@@ -40,7 +40,7 @@ pod install
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/yourusername/KKNetwork.git", from: "1.0.0")
+    .package(url: "https://github.com/lsj980ya/KKNetwork.git", from: "1.0.0")
 ]
 ```
 
@@ -347,7 +347,7 @@ KKNetworkConfig.shared.addInterceptor(CustomInterceptor())
 如果您在使用过程中遇到问题，请：
 
 1. 查看文档
-2. 搜索 [Issues](https://github.com/yourusername/KKNetwork/issues)
+2. 搜索 [Issues](https://github.com/lsj980ya/KKNetwork/issues)
 3. 提交新的 Issue
 
 ## 贡献

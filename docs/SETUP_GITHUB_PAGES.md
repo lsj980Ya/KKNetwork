@@ -46,7 +46,7 @@ git push origin main
 部署成功后，你的文档将在以下地址可用：
 
 ```
-https://yourusername.github.io/repositoryname/
+https://lsj980ya.github.io/repositoryname/
 ```
 
 例如：
@@ -105,7 +105,7 @@ https://yourusername.github.io/repositoryname/
    ```
 3. 在域名提供商处配置 DNS：
    ```
-   CNAME  docs  yourusername.github.io
+   CNAME  docs  lsj980ya.github.io
    ```
 
 ### 自定义主题

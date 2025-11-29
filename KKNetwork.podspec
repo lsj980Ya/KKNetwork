@@ -8,10 +8,10 @@ Pod::Spec.new do |s|
   拦截器、批量请求、链式请求等功能。
                        DESC
 
-  s.homepage         = 'https://github.com/yourusername/KKNetwork'
+  s.homepage         = 'https://github.com/lsj980ya/KKNetwork'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Your Name' => 'your.email@example.com' }
-  s.source           = { :git => 'https://github.com/yourusername/KKNetwork.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/lsj980ya/KKNetwork.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '13.0'
   s.swift_version = '5.0'

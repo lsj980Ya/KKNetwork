@@ -25,7 +25,7 @@
 3. 保存设置
 4. 推送代码到 main/master 分支
 5. 等待 Actions 自动部署
-6. 访问 `https://yourusername.github.io/repositoryname/`
+6. 访问 `https://lsj980ya.github.io/repositoryname/`
 
 **如果遇到 "Get Pages site failed" 错误：**
 - 确保在 Settings → Pages 中已选择 "GitHub Actions" 作为 Source
