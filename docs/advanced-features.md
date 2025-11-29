@@ -1,3 +1,8 @@
+---
+layout: default
+title: 高级功能
+---
+
 # 高级功能
 
 本文档介绍 KKNetwork 的高级功能和使用技巧。

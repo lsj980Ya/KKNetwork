@@ -1,3 +1,8 @@
+---
+layout: default
+title: 最佳实践
+---
+
 # 最佳实践
 
 本文档介绍使用 KKNetwork 的最佳实践和推荐模式。

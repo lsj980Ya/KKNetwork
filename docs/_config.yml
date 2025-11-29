@@ -3,3 +3,30 @@ title: KKNetwork
 description: 基于 Alamofire 和 SwiftyJSON 的完整网络请求框架
 show_downloads: true
 google_analytics: 
+
+# Markdown 处理
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# 插件
+plugins:
+  - jekyll-relative-links
+
+# 相对链接配置
+relative_links:
+  enabled: true
+  collections: false
+
+# 包含的文件
+include:
+  - _config.yml
+  - "*.md"
+
+# 排除的文件
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor 

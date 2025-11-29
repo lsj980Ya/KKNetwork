@@ -1,3 +1,8 @@
+---
+layout: default
+title: 请求类型
+---
+
 # 请求类型
 
 KKNetwork 提供了多种请求类型，满足不同的业务需求。

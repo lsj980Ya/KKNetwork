@@ -1,3 +1,8 @@
+---
+layout: default
+title: 核心类介绍
+---
+
 # 核心类介绍
 
 本文档详细介绍 KKNetwork 框架的核心类及其使用方法。

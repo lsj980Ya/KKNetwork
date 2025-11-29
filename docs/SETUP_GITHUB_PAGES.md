@@ -1,3 +1,8 @@
+---
+layout: default
+title: GitHub Pages 配置指南
+---
+
 # GitHub Pages 配置指南
 
 本指南将帮助你配置 GitHub Pages 来托管 KKNetwork 文档。
