@@ -17,9 +17,21 @@
 - 使用最新版本的 GitHub Actions（v4）
 
 **配置 GitHub Pages：**
-1. 进入仓库 Settings → Pages
-2. Source 选择 "GitHub Actions"
-3. 推送代码后自动部署
+
+⚠️ **重要：首次使用需要手动启用 GitHub Pages**
+
+1. 进入仓库 **Settings** → **Pages**
+2. **Source** 选择 "**GitHub Actions**"
+3. 保存设置
+4. 推送代码到 main/master 分支
+5. 等待 Actions 自动部署
+6. 访问 `https://yourusername.github.io/repositoryname/`
+
+**如果遇到 "Get Pages site failed" 错误：**
+- 确保在 Settings → Pages 中已选择 "GitHub Actions" 作为 Source
+- 确保仓库是 public 或者有 GitHub Pro/Team/Enterprise 账户
+- 等待几分钟让 GitHub 初始化 Pages 服务
+- 手动触发一次工作流（Actions → Deploy Documentation → Run workflow）
 
 ### 2. Swift CI (`swift.yml`)
 
