@@ -94,7 +94,11 @@ open class KKRateLimitedRequest: KKBaseRequest {
             let key = rateLimitKey()
             
             if !KKRateLimiter.shared.shouldAllowRequest(for: key) {
-                // 直接调用失败回调，不需要设置 error（error 是 private(set)）
+                let error = NSError(domain: "KKNetwork",
+                                  code: -1003,
+                                  userInfo: [NSLocalizedDescriptionKey: "请求过于频繁，请稍后再试"])
+                self.error = error
+                
                 DispatchQueue.main.async {
                     failure?(self)
                 }
