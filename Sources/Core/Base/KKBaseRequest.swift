@@ -18,7 +18,8 @@ open class KKBaseRequest: NSObject {
     private var dataRequest: DataRequest?
     
     /// 当前使用的域名索引（用于域名切换）
-    private var currentBaseURLIndex: Int = -1
+    /// 0 = 主域名 baseURL, 1 = backupBaseURLs[0], 2 = backupBaseURLs[1], ...
+    private var currentBaseURLIndex: Int = 0
     
     /// 当前重试次数
     private var currentRetryCount: Int = 0
@@ -223,9 +224,10 @@ open class KKBaseRequest: NSObject {
         }
         
         // 检查是否可以切换域名重试
+        // currentBaseURLIndex: 0 = baseURL, 1 = backupURLs[0], 2 = backupURLs[1], ...
         if enableBackupURLRetry() {
-            let totalURLs = 1 + KKNetworkConfig.shared.backupBaseURLs.count
-            if currentBaseURLIndex < totalURLs - 1 {
+            let backupCount = KKNetworkConfig.shared.backupBaseURLs.count
+            if currentBaseURLIndex < backupCount {
                 return true
             }
         }
@@ -245,8 +247,8 @@ open class KKBaseRequest: NSObject {
         }
         // 再尝试切换域名
         else if enableBackupURLRetry() {
-            let totalURLs = 1 + KKNetworkConfig.shared.backupBaseURLs.count
-            if currentBaseURLIndex < totalURLs - 1 {
+            let backupCount = KKNetworkConfig.shared.backupBaseURLs.count
+            if currentBaseURLIndex < backupCount {
                 currentBaseURLIndex += 1
                 currentRetryCount = 0
                 KKNetworkLogger.log("🔄 切换域名重试 (域名索引: \(currentBaseURLIndex)): \(requestPath())", level: .info)
@@ -285,13 +287,17 @@ open class KKBaseRequest: NSObject {
         
         if let customURL = customBaseURL() {
             baseURL = customURL
-        } else if currentBaseURLIndex == -1 {
-            baseURL = KKNetworkConfig.shared.baseURL
-        } else if currentBaseURLIndex == 0 {
+        } else if currentBaseURLIndex <= 0 {
+            // 0 或初始值 -1 都使用主域名
             baseURL = KKNetworkConfig.shared.baseURL
         } else {
+            // 1, 2, 3... 使用备用域名
             let backupIndex = currentBaseURLIndex - 1
-            baseURL = KKNetworkConfig.shared.backupBaseURLs[backupIndex]
+            if backupIndex < KKNetworkConfig.shared.backupBaseURLs.count {
+                baseURL = KKNetworkConfig.shared.backupBaseURLs[backupIndex]
+            } else {
+                baseURL = KKNetworkConfig.shared.baseURL
+            }
         }
         
         let path = requestPath()
