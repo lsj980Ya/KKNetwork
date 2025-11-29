@@ -17,6 +17,9 @@ open class KKBaseRequest: NSObject {
     /// 请求任务
     private var dataRequest: DataRequest?
     
+    /// Session（需要持有引用，防止被提前释放）
+    private var session: Session?
+    
     /// 当前使用的域名索引（用于域名切换）
     /// 0 = 主域名 baseURL, 1 = backupBaseURLs[0], 2 = backupBaseURLs[1], ...
     private var currentBaseURLIndex: Int = 0
@@ -160,17 +163,17 @@ open class KKBaseRequest: NSObject {
         
         KKNetworkLogger.logRequest(url: url, method: method, parameters: parameters, headers: headers)
         
-        // 创建 Session
+        // 创建 Session（保存为实例属性，防止被提前释放）
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = timeout
-        let session = Session(configuration: configuration)
+        session = Session(configuration: configuration)
         
         // 发起请求
-        dataRequest = session.request(url,
-                                      method: method,
-                                      parameters: parameters,
-                                      encoding: encoding,
-                                      headers: headers)
+        dataRequest = session?.request(url,
+                                       method: method,
+                                       parameters: parameters,
+                                       encoding: encoding,
+                                       headers: headers)
         
         dataRequest?.responseData { [weak self] response in
             guard let self = self else { return }
