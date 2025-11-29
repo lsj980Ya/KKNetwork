@@ -51,12 +51,12 @@ public class KKGzipTransformer: KKDataTransformer {
     
     public func transformRequest(_ data: Data) -> Data {
         // 压缩请求数据
-        return (data as NSData).compressed(using: .zlib) as Data? ?? data
+        return (try? (data as NSData).compressed(using: .zlib) as Data) ?? data
     }
     
     public func transformResponse(_ data: Data) -> Data {
         // 解压响应数据
-        return (data as NSData).decompressed(using: .zlib) as Data? ?? data
+        return (try? (data as NSData).decompressed(using: .zlib) as Data) ?? data
     }
 }
 

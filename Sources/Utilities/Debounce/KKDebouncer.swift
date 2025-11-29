@@ -106,15 +106,20 @@ open class KKDebouncedRequest: KKBaseRequest {
             let debouncer = KKDebouncedRequest.debouncers[key] ?? KKDebouncer(delay: delay)
             KKDebouncedRequest.debouncers[key] = debouncer
             
-            debouncer.debounce { [weak self] in
-                guard let self = self else { return }
-                _ = super.start(success: success, failure: failure)
+            debouncer.debounce { [self] in
+                _ = self.startSuper(success: success, failure: failure)
             }
             
             return self
         } else {
             return super.start(success: success, failure: failure)
         }
+    }
+    
+    /// 调用父类的 start 方法
+    private func startSuper(success: ((KKBaseRequest) -> Void)?,
+                           failure: ((KKBaseRequest) -> Void)?) -> Self {
+        return super.start(success: success, failure: failure)
     }
 }
 

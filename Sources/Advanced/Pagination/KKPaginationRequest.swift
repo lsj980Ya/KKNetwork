@@ -84,12 +84,15 @@ open class KKPaginationRequest: KKBaseRequest {
         hasMore = true
         
         return start(
-            success: { [weak self] request in
+            success: { [weak self] _ in
                 guard let self = self, let json = self.responseJSON else { return }
                 self.parsePaginationInfo(json)
                 success?(self)
             },
-            failure: failure
+            failure: { [weak self] _ in
+                guard let self = self else { return }
+                failure?(self)
+            }
         )
     }
     
@@ -105,15 +108,16 @@ open class KKPaginationRequest: KKBaseRequest {
         currentPage += 1
         
         return start(
-            success: { [weak self] request in
+            success: { [weak self] _ in
                 guard let self = self, let json = self.responseJSON else { return }
                 self.parsePaginationInfo(json)
                 success?(self)
             },
-            failure: { [weak self] request in
+            failure: { [weak self] _ in
+                guard let self = self else { return }
                 // 失败时回退页码
-                self?.currentPage -= 1
-                failure?(request)
+                self.currentPage -= 1
+                failure?(self)
             }
         )
     }
@@ -123,12 +127,15 @@ open class KKPaginationRequest: KKBaseRequest {
     public func refresh(success: ((KKPaginationRequest) -> Void)? = nil,
                        failure: ((KKPaginationRequest) -> Void)? = nil) -> Self {
         return start(
-            success: { [weak self] request in
+            success: { [weak self] _ in
                 guard let self = self, let json = self.responseJSON else { return }
                 self.parsePaginationInfo(json)
                 success?(self)
             },
-            failure: failure
+            failure: { [weak self] _ in
+                guard let self = self else { return }
+                failure?(self)
+            }
         )
     }
 }
