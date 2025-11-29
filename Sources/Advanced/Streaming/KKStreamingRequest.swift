@@ -13,7 +13,7 @@ public typealias KKStreamDataHandler = (Data) -> Void
 public typealias KKStreamEventHandler = (String, JSON) -> Void
 
 /// 流式请求（支持 SSE）
-open class KKStreamingRequest: KKBaseRequest {
+open class KKStreamingRequest: KKBaseRequest, URLSessionDataDelegate {
     
     // MARK: - Properties
     
@@ -126,11 +126,8 @@ open class KKStreamingRequest: KKBaseRequest {
             eventHandler?(eventType, json)
         }
     }
-}
-
-// MARK: - URLSessionDataDelegate
-
-extension KKStreamingRequest: URLSessionDataDelegate {
+    
+    // MARK: - URLSessionDataDelegate
     
     public func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         dataHandler?(data)

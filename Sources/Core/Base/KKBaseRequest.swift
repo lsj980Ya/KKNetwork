@@ -10,7 +10,7 @@ import Alamofire
 import SwiftyJSON
 
 /// 请求基类
-open class KKBaseRequest {
+open class KKBaseRequest: NSObject {
     
     // MARK: - Properties
     

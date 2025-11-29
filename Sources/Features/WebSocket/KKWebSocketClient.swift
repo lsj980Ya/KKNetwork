@@ -29,7 +29,7 @@ public struct KKWebSocketConfig {
 }
 
 /// 增强版 WebSocket 客户端
-public class KKWebSocketClient {
+public class KKWebSocketClient: NSObject {
     
     // MARK: - Properties
     
@@ -66,6 +66,7 @@ public class KKWebSocketClient {
     public init(url: String, headers: [String: String] = [:]) {
         self.url = url
         self.headers = headers
+        super.init()
     }
     
     // MARK: - Public Methods

@@ -20,13 +20,7 @@ public struct KKWebSocketMessage {
     }
 }
 
-/// WebSocket 连接状态
-public enum KKWebSocketState {
-    case disconnected
-    case connecting
-    case connected
-    case reconnecting
-}
+// 注意：KKWebSocketState 已在 KKWebSocketClient.swift 中定义
 
 /// WebSocket 管理器
 public class KKWebSocketManager: NSObject {
@@ -146,7 +140,7 @@ public class KKWebSocketManager: NSObject {
     /// 断开连接
     public func disconnect() {
         webSocketTask?.cancel(with: .goingAway, reason: nil)
-        isConnected = false
+        state = .disconnected
         KKNetworkLogger.log("🔌 WebSocket 已断开", level: .info)
     }
     
@@ -187,14 +181,14 @@ public class KKWebSocketManager: NSObject {
 extension KKWebSocketManager: URLSessionWebSocketDelegate {
     
     public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        isConnected = true
+        state = .connected
         KKNetworkLogger.log("✅ WebSocket 已连接", level: .info)
-        connectionHandler?(true)
+        stateChangeHandler?(.connected)
     }
     
     public func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-        isConnected = false
+        state = .disconnected
         KKNetworkLogger.log("🔌 WebSocket 已关闭", level: .info)
-        connectionHandler?(false)
+        stateChangeHandler?(.disconnected)
     }
 }
