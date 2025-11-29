@@ -24,16 +24,16 @@ open class KKBaseRequest {
     private var currentRetryCount: Int = 0
     
     /// 响应数据
-    public private(set) var responseData: Data?
+    public internal(set) var responseData: Data?
     
     /// 响应 JSON
-    public private(set) var responseJSON: JSON?
+    public internal(set) var responseJSON: JSON?
     
     /// 响应字符串
-    public private(set) var responseString: String?
+    public internal(set) var responseString: String?
     
     /// 错误信息
-    public private(set) var error: Error?
+    public internal(set) var error: Error?
     
     /// 成功回调
     private var successBlock: ((KKBaseRequest) -> Void)?
